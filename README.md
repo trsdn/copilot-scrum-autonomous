@@ -154,6 +154,9 @@ copilot
 | Writing tests | `@test-engineer` | Behavior understanding, TDD |
 | Code review | `@code-review` | Structured review with checklists |
 | Research/docs | `@research-agent` / `@documentation-agent` | Synthesis, technical writing |
+| Board hygiene | `@board-keeper` | Project board column management |
+| Decision review | `@challenger` | Adversarial review of decisions and sprints |
+| CI failures | `@ci-fixer` | Diagnose and fix CI/CD failures |
 
 ## Sprint Documentation & Artifacts
 
@@ -227,29 +230,37 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 ├── .github/
 │   ├── copilot-instructions.md      # Main Copilot instructions
 │   ├── agents/                      # Specialized agent definitions
-│   │   ├── code-developer.agent.md
-│   │   ├── test-engineer.agent.md
-│   │   ├── documentation-agent.agent.md
-│   │   ├── security-reviewer.agent.md
-│   │   ├── research-agent.agent.md
 │   │   ├── architect.agent.md
+│   │   ├── board-keeper.agent.md
+│   │   ├── challenger.agent.md
+│   │   ├── ci-fixer.agent.md
+│   │   ├── code-developer.agent.md
+│   │   ├── copilot-customization-builder.agent.md
+│   │   ├── documentation-agent.agent.md
 │   │   ├── release-agent.agent.md
-│   │   └── copilot-customization-builder.agent.md
+│   │   ├── research-agent.agent.md
+│   │   ├── security-reviewer.agent.md
+│   │   └── test-engineer.agent.md
 │   ├── prompts/                     # Reusable workflow prompts
-│   │   ├── sprint-planning.prompt.md
-│   │   ├── sprint-start.prompt.md
-│   │   ├── sprint-review.prompt.md
-│   │   ├── sprint-retro.prompt.md
-│   │   ├── orchestrate-feature.prompt.md
-│   │   ├── orchestrate-bugfix.prompt.md
+│   │   ├── architecture-review.prompt.md
 │   │   ├── code-review.prompt.md
 │   │   ├── create-pr.prompt.md
-│   │   ├── tdd-workflow.prompt.md
-│   │   ├── architecture-review.prompt.md
-│   │   ├── release-check.prompt.md
+│   │   ├── direction-gate.prompt.md
+│   │   ├── issue-triage.prompt.md
 │   │   ├── new-custom-agent.prompt.md
+│   │   ├── new-instructions-file.prompt.md
 │   │   ├── new-prompt-file.prompt.md
-│   │   └── new-instructions-file.prompt.md
+│   │   ├── orchestrate-bugfix.prompt.md
+│   │   ├── orchestrate-feature.prompt.md
+│   │   ├── release-check.prompt.md
+│   │   ├── sprint-planning.prompt.md
+│   │   ├── sprint-retro.prompt.md
+│   │   ├── sprint-review.prompt.md
+│   │   ├── sprint-start.prompt.md
+│   │   ├── subagent-dispatch.prompt.md
+│   │   ├── tdd-workflow.prompt.md
+│   │   ├── web-research.prompt.md
+│   │   └── writing-plans.prompt.md
 │   ├── workflows/
 │   │   ├── ci.yml                   # CI: lint, typecheck, test, security
 │   │   └── release.yml              # Semantic release

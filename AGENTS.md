@@ -63,6 +63,9 @@ See `docs/architecture/ADR.md` for immutable architectural decisions.
 | Research Agent | `@research-agent` | Research topics, propose solutions |
 | Architect | `@architect` | ADR compliance, system design review |
 | Release Agent | `@release-agent` | Versioning, changelogs, release readiness |
+| Board Keeper | `@board-keeper` | Project board hygiene, column management |
+| Challenger | `@challenger` | Adversarial review of decisions and sprints |
+| CI Fixer | `@ci-fixer` | Diagnose and fix CI/CD failures |
 | Copilot Customization Builder | `@copilot-customization-builder` | Create agents, prompts, instructions |
 
 ## Available Prompts
@@ -80,6 +83,11 @@ See `docs/architecture/ADR.md` for immutable architectural decisions.
 | `tdd-workflow` | Test-driven development cycle |
 | `architecture-review` | Evaluate change for ADR compliance |
 | `release-check` | Assess release readiness |
+| `direction-gate` | Structured review before strategic pivots |
+| `issue-triage` | Triage issues needing attention |
 | `new-custom-agent` | Template for creating a new agent |
 | `new-prompt-file` | Template for creating a new prompt |
 | `new-instructions-file` | Template for creating instructions file |
+| `subagent-dispatch` | Execute plans with independent subagents |
+| `web-research` | Structured web research with citations |
+| `writing-plans` | Implementation plans with bite-sized tasks |

@@ -26,6 +26,7 @@
 - pytest for testing
 - Keep code readable; avoid clever one-liners
 - Preserve existing public APIs unless explicitly asked to change
+- **Python 3.14 compat**: No leading zeros in integer literals (e.g., `date(2023, 3, 15)` not `date(2023, 03, 15)`)
 
 ## Development Principles
 
@@ -70,6 +71,13 @@ See `docs/architecture/ADR.md` for all architectural decisions. **Do NOT modify 
 4. **Only context-switch** if the user explicitly confirms they want to stop the current task
 
 Never silently abandon an in-progress issue to chase a new idea.
+
+---
+
+## Workflow Gates
+
+- **Direction Changes → Gate**: Any strategic direction change MUST go through the `direction-gate` prompt before execution.
+- **Every Sprint → Challenger**: The Challenger agent reviews deliverables at sprint review and scope at sprint planning.
 
 ---
 
