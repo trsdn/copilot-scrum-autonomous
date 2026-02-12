@@ -1,0 +1,181 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run pytest:*)",
+      "Bash(uv run ruff:*)",
+      "Bash(uv run mypy:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh label:*)",
+      "Bash(gh project:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_FILE_PATHS\" | grep -qE '\\.(env|db)$' && echo 'BLOCKED: Cannot edit .env or .db files' && exit 1 || exit 0"
+          },
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_FILE_PATHS\" | grep -qE 'docs/architecture/ADR' && echo 'WARNING: Modifying ADR document - ensure this change is intentional and documented' || exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ruff format --quiet $CLAUDE_FILE_PATHS && ruff check --fix --quiet $CLAUDE_FILE_PATHS 2>/dev/null || true",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_FILE_PATHS\" | grep -q '\\.py$' && uv run mypy --no-error-summary $CLAUDE_FILE_PATHS 2>/dev/null || true",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_FILE_PATHS\" | grep -qE 'src/' && uv run pytest tests/ -x -q --tb=short 2>&1 | head -20 || true",
+            "async": true,
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-reminder.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/ntfy-notify.sh",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/ntfy-notify.sh",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/ntfy-notify.sh",
+            "async": true,
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "sprint-planning": {
+      "description": "Triage backlog, score issues, select sprint scope, move to Planned",
+      "path": "skills/sprint-planning/SKILL.md"
+    },
+    "sprint-start": {
+      "description": "Start sprint execution with quality gates and daily huddles",
+      "path": "skills/sprint-start/SKILL.md"
+    },
+    "sprint-review": {
+      "description": "Review sprint deliverables: demo, metrics, autonomous accept",
+      "path": "skills/sprint-review/SKILL.md"
+    },
+    "sprint-retro": {
+      "description": "Sprint retrospective: what went well/badly, process improvements",
+      "path": "skills/sprint-retro/SKILL.md"
+    },
+    "agent-memory": {
+      "description": "Save, recall, and organize persistent memories across sessions",
+      "path": "skills/agent-memory/SKILL.md"
+    },
+    "notify": {
+      "description": "Send push notifications to mobile via ntfy.sh",
+      "path": "skills/notify/SKILL.md"
+    },
+    "github-issues": {
+      "description": "Create, update, and manage GitHub issues",
+      "path": "skills/github-issues/SKILL.md"
+    },
+    "create-pr": {
+      "description": "Create GitHub PRs with properly formatted titles",
+      "path": "skills/create-pr/SKILL.md"
+    },
+    "code-review": {
+      "description": "Perform structured code reviews with security and performance checks",
+      "path": "skills/code-review/SKILL.md"
+    },
+    "tdd-workflow": {
+      "description": "Test-Driven Development workflow — write tests before implementation",
+      "path": "skills/tdd-workflow/SKILL.md"
+    },
+    "verification-before-completion": {
+      "description": "Run verification commands before claiming work is complete",
+      "path": "skills/verification-before-completion/SKILL.md"
+    },
+    "writing-plans": {
+      "description": "Create structured implementation plans before touching code",
+      "path": "skills/writing-plans/SKILL.md"
+    },
+    "subagent-driven-development": {
+      "description": "Execute implementation plans with independent subagent tasks",
+      "path": "skills/subagent-driven-development/SKILL.md"
+    }
+  },
+  "agents": {
+    "code-developer": {
+      "description": "Improve and extend the codebase with clean, tested code",
+      "path": "agents/code-developer.md",
+      "capabilities": ["development", "refactoring", "new modules"]
+    },
+    "test-engineer": {
+      "description": "Write and maintain the test suite",
+      "path": "agents/test-engineer.md",
+      "capabilities": ["test writing", "coverage analysis", "TDD"]
+    },
+    "documentation-agent": {
+      "description": "Create and maintain project documentation",
+      "path": "agents/documentation-agent.md",
+      "capabilities": ["technical writing", "API docs", "user guides"]
+    },
+    "security-reviewer": {
+      "description": "Review code for security issues and credential exposure",
+      "path": "agents/security-reviewer.md",
+      "capabilities": ["security audit", "credential scanning", "data handling review"]
+    },
+    "research-agent": {
+      "description": "Research topics and propose solutions",
+      "path": "agents/research-agent.md",
+      "capabilities": ["literature review", "concept research", "solution proposals"]
+    }
+  }
+}
