@@ -103,14 +103,35 @@ Before claiming work is complete, fixed, or passing:
 
 ---
 
+## Agent Dispatch Rules
+
+**Custom agents only have `edit` + `view` tools — NO `create`, NO `bash`.** For tasks requiring **new file creation**, use `general-purpose` agent type with the custom agent's instructions included in the prompt.
+
+| Task | Agent Type | Tools Available |
+|------|-----------|----------------|
+| Edit existing code | `code-developer` | `edit` + `view` only |
+| Create new files | `general-purpose` | Full toolset (`create`, `bash`, `edit`, `view`, `grep`, `glob`) |
+| Edit existing tests | `test-engineer` | `edit` + `view` only |
+| Create new test files | `general-purpose` | Full toolset — include test-engineer instructions in prompt |
+| Edit existing docs | `documentation-agent` | `edit` + `view` only |
+| Create new docs | `general-purpose` | Full toolset — include documentation-agent instructions in prompt |
+| Code review (read-only) | `code-review` | `edit` + `view` only |
+| Research (read-only) | `research-agent` | `edit` + `view` only |
+| Security audit (read-only) | `security-reviewer` | `edit` + `view` only |
+| Adversarial review (read-only) | `challenger` | `edit` + `view` only |
+| Board operations (needs bash) | `general-purpose` | Include board-keeper instructions |
+| CI fix (needs bash) | `general-purpose` | Include ci-fixer instructions |
+| File search | `explore` (built-in) | `grep` + `glob` + `view` |
+| Running commands | `task` (built-in) | Full CLI tools |
+
 ## Known Agent Limitations
 
 | Issue | Workaround |
 |-------|------------|
-| Custom agents only have `edit` + `view` tools — no `create`, no `bash` | Use `general-purpose` agent type for new file creation, or pre-create empty files before dispatching |
+| `tools` YAML frontmatter does NOT grant additional tools to sub-agents | Platform limitation — removed from all agents to avoid confusion |
 | Agents may reuse existing class/function names | Specify unique names explicitly in the prompt |
 | Agents can't create files in non-existent directories | Create directory with `mkdir -p` before dispatching agent |
-| `tools` YAML frontmatter does NOT grant additional tools to sub-agents | Platform limitation — use `general-purpose` with custom instructions in prompt |
+| Agents may report "success" without actually completing | Always verify agent output independently — check VCS diff |
 
 ### Pre-Creation Pattern (for custom agents needing new files)
 
@@ -121,7 +142,6 @@ Before claiming work is complete, fixed, or passing:
 ```
 
 **Alternative**: Use `general-purpose` agent and include the custom agent's instructions in the prompt.
-| Agents may report "success" without actually completing | Always verify agent output independently — check VCS diff |
 
 ---
 
