@@ -344,6 +344,16 @@ This template defaults to Python tooling. To adapt for other languages:
 
 ## Philosophy
 
+> **The AI-Scrum Manifesto** — see [`docs/constitution/PHILOSOPHY.md`](docs/constitution/PHILOSOPHY.md)
+
+*We have come to value:*
+- **Autonomous execution** over constant approval
+- **Verified evidence** over claimed completion
+- **Sprint discipline** over feature chasing
+- **Continuous process improvement** over static workflows
+
+*Inspired by the [Agile Manifesto](https://agilemanifesto.org), adapted for human-AI collaboration.*
+
 > **Focus, Quality, Incremental, Improve** — in that order.
 
 1. **Protect Focus** — Complete what you start before moving on
