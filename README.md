@@ -155,6 +155,71 @@ copilot
 | Code review | `@code-review` | Structured review with checklists |
 | Research/docs | `@research-agent` / `@documentation-agent` | Synthesis, technical writing |
 
+## Sprint Documentation & Artifacts
+
+Every sprint produces structured documentation that creates an audit trail and preserves knowledge across sessions.
+
+### Where Things Are Stored
+
+| Artifact | Location | Created By | Purpose |
+|----------|----------|------------|---------|
+| Sprint log | `docs/sprints/sprint-N-log.md` | Sprint Start | Huddle decisions, learnings, plan changes during execution |
+| Velocity data | `docs/sprints/velocity.md` | Sprint Retro | Sprint-over-sprint performance tracking |
+| Issue comments | GitHub Issues | Huddles | Traceable audit trail per issue |
+| Implementation plans | `docs/plans/` | Planning / Writing Plans | Detailed implementation specs |
+| ADRs | `docs/architecture/ADR.md` | As needed | Immutable architectural decisions |
+| Process rules | `docs/constitution/PROCESS.md` | Sprint Retro | Evolving process constitution |
+
+### The Huddle Documentation Rule
+
+After each issue is completed, a **daily huddle** is performed and documented in **two places**:
+
+1. **Comment on the completed GitHub issue** — creates a traceable, permanent record:
+   ```bash
+   gh issue comment 42 --body "### Huddle — Sprint 5, Issue 3/7 done
+   **Outcome**: Implemented rate limiter with token bucket, 95% test coverage
+   **Key learning**: Redis connection pooling needed for production scale
+   **Decision**: Re-prioritize #45 above #43 based on this finding
+   **Next**: #45 — Connection pool configuration"
+   ```
+
+2. **Append to sprint log** (`docs/sprints/sprint-N-log.md`) — preserves context for retros:
+   ```markdown
+   ### Huddle — After Issue #42 (2025-01-15 14:30)
+   **Completed**: #42 — Rate limiter implemented
+   **Sprint progress**: 3/7 issues done
+   **Key learning**: Redis pooling impacts performance at scale
+   **Plan check**: Reordered — #45 now before #43
+   **Next up**: #45 — Connection pool configuration
+   ```
+
+### Sprint Log Template
+
+Created automatically at sprint start (`docs/sprints/sprint-N-log.md`):
+
+```markdown
+# Sprint N Log — [Date]
+
+**Goal**: [One-sentence sprint goal]
+**Planned**: [N] issues
+
+## Huddles
+[Appended after each issue completes]
+```
+
+### Velocity Tracking
+
+Updated each sprint retro in `docs/sprints/velocity.md`:
+
+```markdown
+| Sprint | Date | Goal | Planned | Done | Carry | ~Hours | Issues/Hr | Notes |
+|--------|------|------|---------|------|-------|--------|-----------|-------|
+| 1      | ...  | ...  | 7       | 7    | 0     | 3.0    | 2.3       | First sprint |
+| 2      | ...  | ...  | 7       | 5    | 2     | 3.5    | 1.4       | Integration heavy |
+```
+
+This data drives sprint sizing — the agent uses historical velocity to determine how many issues to plan.
+
 ## Directory Structure
 
 ```
