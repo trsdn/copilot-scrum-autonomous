@@ -253,6 +253,40 @@ Never silently abandon an in-progress issue to chase a new idea.
 
 ---
 
+## Verification Before Completion
+
+**No completion claims without fresh verification evidence.**
+
+Before claiming work is complete, fixed, or passing:
+
+1. **Identify**: What command proves this claim?
+2. **Run**: Execute the full command (fresh, not cached)
+3. **Read**: Check output, exit code, failure count
+4. **Verify**: Does output confirm the claim?
+5. **Only then**: Make the claim
+
+| Claim | Requires | NOT Sufficient |
+|-------|----------|----------------|
+| "Tests pass" | Test output: 0 failures | "Should pass", previous run |
+| "Lint clean" | Linter output: 0 errors | Partial check |
+| "Bug fixed" | Regression test: red→green | "Code changed" |
+| "Build succeeds" | Build exit code 0 | "Linter passed" |
+
+**Red flags**: Using "should", "probably", expressing satisfaction before verification, about to commit without running tests.
+
+---
+
+## Known Agent Limitations
+
+| Issue | Workaround |
+|-------|------------|
+| Agents sometimes describe code in prose instead of creating files | For new modules, write files directly; agents work better for editing existing files |
+| Agents may reuse existing class/function names | Specify unique names explicitly in the prompt |
+| Agents can't reliably create files in non-existent directories | Create directory with `mkdir -p` before dispatching agent |
+| Agents may report "success" without actually completing | Always verify agent output independently — check VCS diff |
+
+---
+
 ## Available Agents
 
 Defined in `.github/agents/`:
