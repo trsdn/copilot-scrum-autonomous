@@ -392,6 +392,93 @@ This template defaults to Python tooling. To adapt for other languages:
 3. **Small, Testable Diffs** — One feature per PR (~150 lines ideal)
 4. **Continuous Improvement** — Every retro produces actionable improvements
 
+## Process Deep Dive
+
+The development process is defined in [`docs/constitution/PROCESS.md`](docs/constitution/PROCESS.md). Below is additional context, rationale, and learnings for human readers.
+
+<details>
+<summary><strong>Why Each Principle Matters</strong></summary>
+
+#### 1. Protect Focus
+
+- Context switching wastes 15-30min per switch
+- Unfinished work creates technical debt and stale branches
+- Sprint carry-over demoralizes and inflates future estimates
+
+#### 2. Quality Gates
+
+- Merge-before-CI-green creates broken main branches
+- Coverage gates catch untested code paths
+- Strict schema validation catches real configuration bugs
+
+#### 3. Small, Testable Diffs
+
+- Small PRs pass CI faster and are easier to review
+- Bundling module + integration causes carry-over
+- Standalone units are easier to test and reason about
+
+#### 4. Continuous Improvement
+
+- Process improvements compound — each retro makes the next sprint smoother
+- Agent/skill creation eliminates recurring manual work
+- Root cause fixes prevent the same failures from recurring
+
+</details>
+
+<details>
+<summary><strong>Validated Pattern — Standalone-First Development</strong></summary>
+
+The most productive pattern for new modules:
+
+1. Build module as standalone unit (config + function/class)
+2. Write comprehensive tests (15-20 per module)
+3. Merge standalone module
+4. Wire into system in a separate PR with integration tests
+
+</details>
+
+<details>
+<summary><strong>Retro Review Questions</strong></summary>
+
+Ask these at every sprint retrospective:
+
+1. Did we manually do work that an agent should handle?
+2. Did any sub-agent fail or produce wrong output?
+3. Did we repeat a workflow that should be automated?
+4. Did any ceremony take too long or miss important steps?
+5. Were issues stuck in wrong board columns?
+
+</details>
+
+<details>
+<summary><strong>Sprint Sizing — Velocity Data</strong></summary>
+
+Based on observed velocity across sprint types:
+
+| Sprint Type | Recommended Size | Velocity |
+|-------------|-----------------|----------|
+| Module-building | 7 issues | ~2.3 issues/hr |
+| Integration work | 5-6 issues | ~1.0-2.0 issues/hr |
+| Research | 7 issues | ~1.4-3.0 issues/hr |
+| Mixed | 7 issues | ~2.0 issues/hr |
+
+This data drives sprint sizing — the agent uses historical velocity to determine how many issues to plan.
+
+</details>
+
+<details>
+<summary><strong>Key Learnings</strong></summary>
+
+Codified learnings from sprint retrospectives:
+
+1. **Standalone-first, wire-later** is the most productive pattern for new modules
+2. **Coverage gates catch real bugs** — don't skip or disable them
+3. **Config-driven changes are faster** than code changes
+4. **Process improvements compound** — each retro makes the next sprint smoother
+5. **Stakeholder corrections are valuable** — listen when scope/framing is corrected
+
+</details>
+
 ## License
 
 MIT

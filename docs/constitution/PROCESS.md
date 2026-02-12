@@ -23,11 +23,6 @@
 - When new work is suggested mid-sprint: acknowledge → remind current task → offer to create issue → only switch with explicit stakeholder confirmation
 - The backlog exists for a reason — ideas don't get lost, they get queued
 
-**Why This Matters**:
-- Context switching wastes 15-30min per switch
-- Unfinished work creates technical debt and stale branches
-- Sprint carry-over demoralizes and inflates future estimates
-
 ---
 
 ### 2. QUALITY GATES (Never Skip the Checks)
@@ -45,11 +40,6 @@
 - [ ] Project board updated (issue moved to Done)
 - [ ] Worktree cleaned up
 
-**Why This Matters**:
-- Merge-before-CI-green creates broken main branches
-- Coverage gates catch untested code paths
-- Strict schema validation catches real configuration bugs
-
 ---
 
 ### 3. SMALL, TESTABLE DIFFS (Incremental Over Monolithic)
@@ -61,17 +51,6 @@
 - Standalone modules first, integration in separate PR
 - Config-driven changes preferred over code changes
 - Each PR must be independently shippable
-
-**Validated Pattern — Standalone-First**:
-1. Build module as standalone unit (config + function/class)
-2. Write comprehensive tests (15-20 per module)
-3. Merge standalone module
-4. Wire into system in a separate PR with integration tests
-
-**Why This Matters**:
-- Small PRs pass CI faster and are easier to review
-- Bundling module + integration causes carry-over
-- Standalone units are easier to test and reason about
 
 ---
 
@@ -85,18 +64,6 @@
 - Repeated manual work → create a skill or script
 - Recurring failures → fix root cause, don't just rerun
 - All improvements tracked as GitHub issues
-
-**Review Questions (each retro)**:
-1. Did we manually do work that an agent should handle?
-2. Did any sub-agent fail or produce wrong output?
-3. Did we repeat a workflow that should be automated?
-4. Did any ceremony take too long or miss important steps?
-5. Were issues stuck in wrong board columns?
-
-**Why This Matters**:
-- Process improvements compound — each retro makes the next sprint smoother
-- Agent/skill creation eliminates recurring manual work
-- Root cause fixes prevent the same failures from recurring
 
 ---
 
@@ -196,15 +163,6 @@ Planning → Start → [Execute with Huddles] → Review → Retro → Planning
 | **Review** | Summary | Send sprint summary notification; stakeholder reviews async |
 | **Retro** | Improve | MUST evaluate process/tooling improvements (Step 8) |
 
-### Sprint Sizing
-
-| Sprint Type | Recommended Size | Velocity |
-|-------------|-----------------|----------|
-| Module-building | 7 issues | ~2.3 issues/hr |
-| Integration work | 5-6 issues | ~1.0-2.0 issues/hr |
-| Research | 7 issues | ~1.4-3.0 issues/hr |
-| Mixed | 7 issues | ~2.0 issues/hr |
-
 ---
 
 ## Agent Dispatch Rules
@@ -221,14 +179,6 @@ Planning → Start → [Execute with Huddles] → Review → Retro → Planning
 | Research | `research-agent` | Sonnet | Synthesis |
 | File search | `explore` (built-in) | Haiku | Pattern matching |
 | Running commands | `task` (built-in) | Haiku | Pass/fail only |
-
-### Known Limitations
-
-| Issue | Workaround |
-|-------|------------|
-| Sub-agents sometimes describe code instead of creating files | For new modules, write files directly |
-| Test-engineer may reuse existing class names | Always specify unique class names in prompt |
-| Sub-agents can't reliably create files in new directories | Create directory first, then dispatch sub-agent |
 
 ---
 
@@ -286,18 +236,6 @@ Ideas → Backlog → Planned → In Progress → Validation → Done
 | CI | Green | Red |
 
 > **Customize this section** with domain-specific validation criteria (e.g., performance benchmarks, integration tests, acceptance tests).
-
----
-
-## Key Learnings
-
-> **Update this section** after each retro with codified learnings from your sprints.
-
-1. **Standalone-first, wire-later** is the most productive pattern for new modules
-2. **Coverage gates catch real bugs** — don't skip or disable them
-3. **Config-driven changes are faster** than code changes
-4. **Process improvements compound** — each retro makes the next sprint smoother
-5. **Stakeholder corrections are valuable** — listen when scope/framing is corrected
 
 ---
 
