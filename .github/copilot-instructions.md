@@ -2,7 +2,7 @@
 
 > **Cross-references** (read automatically — do NOT duplicate content from these):
 > - `AGENTS.md` — project-specific instructions, available agents and prompts
-> - `docs/constitution/PROCESS.md` — full development process constitution (stakeholder model, ceremonies, DoD, ICE scoring, board flow, documentation artifacts)
+> - `docs/constitution/PROCESS.md` — full development process constitution (stakeholder model, ceremonies, DoD, ICE scoring, label flow, documentation artifacts)
 > - `docs/constitution/PHILOSOPHY.md` — values and principles
 
 ## Project Overview
@@ -119,7 +119,6 @@ Before claiming work is complete, fixed, or passing:
 | Research (read-only) | `research-agent` | `edit` + `view` only |
 | Security audit (read-only) | `security-reviewer` | `edit` + `view` only |
 | Adversarial review (read-only) | `challenger` | `edit` + `view` only |
-| Board operations (needs bash) | `general-purpose` | Include board-keeper instructions |
 | CI fix (needs bash) | `general-purpose` | Include ci-fixer instructions |
 | File search | `explore` (built-in) | `grep` + `glob` + `view` |
 | Running commands | `task` (built-in) | Full CLI tools |

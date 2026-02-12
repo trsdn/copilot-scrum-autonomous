@@ -39,7 +39,7 @@ Planning → Start → [Execute with Huddles] → Review → Retro → repeat
 
 | Phase | Slash Command | What Happens |
 |-------|---------------|--------------|
-| **Planning** | `/sprint-planning` | Triage backlog, ICE score, select scope, finalize board |
+| **Planning** | `/sprint-planning` | Triage backlog, ICE score, select scope, assign labels + milestone |
 | **Start** | `/sprint-start` | Create sprint log, begin execution (no consent gate) |
 | **Execute** | *(automatic)* | Issue by issue with quality gates and huddles |
 | **Review** | `/sprint-review` | Gather evidence, delivery report, notify stakeholder |
@@ -94,17 +94,7 @@ source ~/.zshrc
 curl -d "Hello from Copilot!" ntfy.sh/$NTFY_TOPIC
 ```
 
-### 4. Set Up Project Board
-
-Create a GitHub Project board with these columns:
-
-```
-Ideas → Backlog → Planned → In Progress → Validation → Done
-```
-
-Update the project board URL in `AGENTS.md`.
-
-### 5. Start Your First Sprint
+### 4. Start Your First Sprint
 
 ```bash
 # Open GitHub Copilot CLI in your project
@@ -121,11 +111,11 @@ copilot
 ### The Sprint Cycle in Detail
 
 1. **Planning** (`/sprint-planning`)
-   - Reviews board state and open issues
+   - Reviews open issues and their status labels
    - Triages unlabeled issues with ICE scoring
    - Elaborates top issues with acceptance criteria
    - Selects sprint scope (~7 issues based on velocity)
-   - Moves items to "Planned" on the board
+   - Assigns `status:planned` label and sprint milestone
    - Proceeds directly to execution
 
 2. **Execution** (automatic)
@@ -154,7 +144,6 @@ copilot
 | Writing tests | `@test-engineer` | Behavior understanding, TDD |
 | Code review | `@code-review` | Structured review with checklists |
 | Research/docs | `@research-agent` / `@documentation-agent` | Synthesis, technical writing |
-| Board hygiene | `@board-keeper` | Project board column management |
 | Decision review | `@challenger` | Adversarial review of decisions and sprints |
 | CI failures | `@ci-fixer` | Diagnose and fix CI/CD failures |
 
@@ -231,7 +220,6 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 │   ├── copilot-instructions.md      # Main Copilot instructions
 │   ├── agents/                      # Specialized agent definitions
 │   │   ├── architect.agent.md
-│   │   ├── board-keeper.agent.md
 │   │   ├── challenger.agent.md
 │   │   ├── ci-fixer.agent.md
 │   │   ├── code-developer.agent.md
@@ -457,7 +445,7 @@ Ask these at every sprint retrospective:
 2. Did any sub-agent fail or produce wrong output?
 3. Did we repeat a workflow that should be automated?
 4. Did any ceremony take too long or miss important steps?
-5. Were issues stuck in wrong board columns?
+5. Were issues stuck with stale status labels?
 
 </details>
 

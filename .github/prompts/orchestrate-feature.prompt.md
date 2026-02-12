@@ -18,8 +18,6 @@ Full implementation pipeline for a feature issue: implement → test → review 
 gh issue edit N --add-label "status:in-progress"
 ```
 
-Move to "In Progress" on the project board. Create a worktree:
-
 ```bash
 git worktree add -b feat/issue-N-short-description ../project-N main
 cd ../project-N
@@ -81,7 +79,11 @@ gh pr merge --squash --delete-branch
 gh issue close N --comment "Completed in PR #M. [summary of what was delivered]"
 ```
 
-Move issue to "Done" on the project board.
+Remove status labels:
+
+```bash
+gh issue edit N --remove-label "status:in-progress"
+```
 
 ## Step 9: Cleanup
 

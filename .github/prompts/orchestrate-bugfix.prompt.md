@@ -18,8 +18,6 @@ Full bugfix pipeline: repro test → fix → verify → review → PR → close.
 gh issue edit N --add-label "status:in-progress"
 ```
 
-Move to "In Progress" on the project board. Create a worktree:
-
 ```bash
 git worktree add -b fix/issue-N-short-description ../project-N main
 cd ../project-N
@@ -115,7 +113,11 @@ gh pr merge --squash --delete-branch
 gh issue close N --comment "Fixed in PR #M. Regression test added."
 ```
 
-Move issue to "Done" on the project board.
+Remove status labels:
+
+```bash
+gh issue edit N --remove-label "status:in-progress"
+```
 
 ## Step 9: Cleanup
 

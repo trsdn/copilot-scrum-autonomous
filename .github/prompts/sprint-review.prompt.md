@@ -82,8 +82,8 @@ If MUST criteria ARE met:
 ## Step 4: Issue Cleanup
 
 For each issue touched:
-- **DONE** → Close with summary, move to Done on board
-- **Partial** → Comment progress, move back to Planned
+- **DONE** → Close with summary, remove status labels
+- **Partial** → Comment progress, set `status:planned`
 - **Blocked** → Label, document why
 
 Create issues for any discovered work:

@@ -12,10 +12,11 @@ Only escalate if MUST criteria are met (ADR changes, strategic direction, new de
 
 **No code changes during planning. Only issue management, research, and documentation.**
 
-## Step 1: Review Board State
+## Step 1: Review Issue Status
 
 ```bash
-gh project item-list <PROJECT_NUMBER> --owner <OWNER> --limit 30
+gh issue list --label "status:planned"
+gh issue list --label "status:in-progress"
 gh issue list --label "priority:high"
 gh issue list --label "priority:medium"
 gh issue list --limit 30
@@ -57,7 +58,6 @@ Capture ideas discovered during discussion:
 
 ```bash
 gh issue create --title "[Type]: Description" --label "priority:X" --body "..."
-gh project item-add <PROJECT_NUMBER> --owner <OWNER> --url <issue_url>
 ```
 
 ## Step 6: Select Sprint Scope
@@ -79,16 +79,20 @@ Examples:
 
 Label all sprint items with `sprint:N` (incrementing from last sprint).
 
-## Step 7: Finalize Board
+## Step 7: Finalize Sprint
 
-**MANDATORY**: Move all agreed items to Planned on the project board.
+**MANDATORY**: Add `status:planned` label and assign milestone to all agreed items.
 
 ```bash
-gh project item-edit --project-id PROJECT_ID --id ITEM_ID \
-  --field-id STATUS_FIELD_ID --single-select-option-id PLANNED_OPTION_ID
+gh issue edit N --add-label "status:planned"
+gh issue edit N --milestone "Sprint X"
 ```
 
-Verify the move by listing the board.
+Verify by listing planned issues:
+
+```bash
+gh issue list --milestone "Sprint X" --label "status:planned"
+```
 
 ## Step 8: Present Summary
 
@@ -105,11 +109,12 @@ Verify the move by listing the board.
 ### Dependencies
 - #Y depends on #X
 
-### Board Changes
+### Sprint Assignments
 - Issues triaged: N
 - Issues elaborated: N
 - New issues created: N
-- Moved to Planned: N
+- Labeled `status:planned`: N
+- Assigned to milestone: N
 
 ### Velocity Reference
 Prior sprint: X issues in ~Yh (from docs/sprints/velocity.md)

@@ -78,7 +78,7 @@ Review questions:
 2. **Agent reliability**: Did any agent fail to create files, use wrong names, or describe instead of execute? → Update agent prompts
 3. **Prompt gaps**: Did we repeat a manual workflow that should be a prompt? → Create a new prompt
 4. **Ceremony friction**: Did any sprint ceremony take too long or miss important steps? → Update the ceremony prompt
-5. **Board hygiene**: Were issues stuck in wrong columns? → Automate or improve process
+5. **Label hygiene**: Were issues stuck with stale status labels? → Automate or improve process
 
 **Actions**:
 - Update agent files in `.github/agents/` if prompts need improvement

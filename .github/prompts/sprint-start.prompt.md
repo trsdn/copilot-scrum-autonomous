@@ -22,7 +22,12 @@ gh issue list --label "status:in-progress"
 
 ## Step 2: Load Sprint Backlog
 
-If sprint planning was run, use the Planned items from the board.
+If sprint planning was run, use the Planned items:
+
+```bash
+gh issue list --milestone "Sprint N" --label "status:planned"
+```
+
 Otherwise, present prioritized candidates and select based on ICE scoring.
 
 Determine the sprint number from `docs/sprints/velocity.md` (increment from last sprint).
@@ -62,7 +67,11 @@ For each issue in the sprint backlog:
 
 ### 5a. Start Issue
 
-Move to "In Progress" on the board. Create worktree:
+Update status label. Create worktree:
+
+```bash
+gh issue edit N --remove-label "status:planned" --add-label "status:in-progress"
+```
 
 ```bash
 git worktree add -b <branch-name> ../<project>-<short-id> main
@@ -88,7 +97,7 @@ implement → lint/type-check → write unit tests → validate → code review 
 - PR reviewed + squash-merged
 - CI green before merge
 - Issue closed with summary
-- **Board updated**: Move issue to "Done" on project board
+- **Issue closed**: Status labels removed
 
 ### 5d. 🔄 Daily Huddle (after each issue completes)
 

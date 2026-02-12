@@ -37,7 +37,7 @@
 - [ ] PR created, code-reviewed, squash-merged
 - [ ] CI green before merge (wait 3-5min, verify with `gh run list`)
 - [ ] Issue closed with summary comment
-- [ ] Project board updated (issue moved to Done)
+- [ ] Status labels removed, issue closed
 - [ ] Worktree cleaned up
 
 ---
@@ -109,7 +109,7 @@ The agent operates autonomously through full sprint cycles (plan → execute →
 | Code implementation + tests | Follow DoD, CI green, code review |
 | Bug fixes | Regression test required |
 | Config-only changes | Validation required |
-| Board hygiene | Move closed→Done, clean up stale items |
+| Label hygiene | Remove stale status labels, verify label accuracy |
 | Agent/skill improvements | Document in retro, commit to main |
 | Documentation updates | Must not change ADRs or constitution |
 | CI fixes + reruns | Follow standard process |
@@ -155,7 +155,7 @@ Planning → Start → [Execute with Huddles] → Review → Retro → Planning
 
 | Ceremony | Gate | Rule |
 |----------|------|------|
-| **Planning** | Board | MUST move agreed issues to "Planned" before finishing |
+| **Planning** | Labels | MUST add `status:planned` label and assign milestone before finishing |
 | **Start** | Autonomy | Execute autonomously; escalate only per stakeholder model above |
 | **Execute** | Huddle | After each issue: check plan, document on issue + sprint log |
 | **Execute** | Tests | Every feature PR MUST include unit tests (min 3, behavior-verifying) |
@@ -189,7 +189,7 @@ Planning → Start → [Execute with Huddles] → Review → Retro → Planning
 - **Before starting work**: Find or create the issue
 - **During work**: Reference issues in commits (`refs #N` or `fixes #N`)
 - **Discovered work**: Create a new issue immediately — don't just mention it
-- **After completion**: Close with summary comment, move to Done on board
+- **After completion**: Close with summary comment, remove status labels
 
 ### Prioritization (ICE Scoring)
 
@@ -201,11 +201,29 @@ Score = Impact × Confidence / Effort (each 1-3)
 | 2-3 | `priority:medium` |
 | < 2 | `priority:low` |
 
-### Board Flow
+### Label Flow
 
 ```
-Ideas → Backlog → Planned → In Progress → Validation → Done
+Open (no status label) = Backlog → status:planned → status:in-progress → status:validation → Closed = Done
 ```
+
+Sprint grouping uses **Milestones** (`Sprint 1`, `Sprint 2`, etc.) instead of board columns.
+
+```bash
+gh issue edit N --add-label "status:planned"
+gh issue edit N --remove-label "status:planned" --add-label "status:in-progress"
+gh issue edit N --remove-label "status:in-progress" --add-label "status:validation"
+gh issue close N  # removes status labels
+gh issue edit N --milestone "Sprint X"
+gh issue list --label "status:in-progress"
+gh issue list --milestone "Sprint X"
+```
+
+### Label Hygiene
+
+- Closed issues should have status labels removed
+- Open issues should reflect actual state (`status:planned`, `status:in-progress`, or `status:validation`)
+- Stale `status:in-progress` labels on inactive issues should be investigated
 
 ---
 

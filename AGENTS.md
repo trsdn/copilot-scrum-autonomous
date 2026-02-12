@@ -63,7 +63,6 @@ See `docs/architecture/ADR.md` for immutable architectural decisions.
 | Research Agent | `@research-agent` | Research topics, propose solutions |
 | Architect | `@architect` | ADR compliance, system design review |
 | Release Agent | `@release-agent` | Versioning, changelogs, release readiness |
-| Board Keeper | `@board-keeper` | Project board hygiene, column management |
 | Challenger | `@challenger` | Adversarial review of decisions and sprints |
 | CI Fixer | `@ci-fixer` | Diagnose and fix CI/CD failures |
 | Copilot Customization Builder | `@copilot-customization-builder` | Create agents, prompts, instructions |

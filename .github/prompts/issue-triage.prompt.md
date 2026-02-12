@@ -57,16 +57,21 @@ Score = Impact × Confidence / Effort
 gh issue edit <NUMBER> --add-label "priority:high"
 ```
 
-## Step 4: Board Placement
+## Step 4: Label Assignment
 
-Suggest board column based on priority and readiness:
+Assign labels based on priority and readiness:
 
-| Condition | Column |
+| Condition | Action |
 |-----------|--------|
-| High priority, clear requirements | Planned |
-| Medium priority, needs more detail | Backlog |
-| Low priority or speculative | Backlog |
-| Needs investigation first | Backlog + `needs-investigation` label |
+| High priority, clear requirements | Add `status:planned`, assign to milestone |
+| Medium priority, needs more detail | Priority label only (stays in backlog) |
+| Low priority or speculative | Priority label only (stays in backlog) |
+| Needs investigation first | Add `needs-investigation` label |
+
+```bash
+gh issue edit N --add-label "priority:high" --add-label "status:planned"
+gh issue edit N --milestone "Sprint X"
+```
 
 ## Step 5: Report
 
