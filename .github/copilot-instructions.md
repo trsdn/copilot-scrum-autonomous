@@ -26,7 +26,6 @@
 - pytest for testing
 - Keep code readable; avoid clever one-liners
 - Preserve existing public APIs unless explicitly asked to change
-- **Python 3.14 compat**: No leading zeros in integer literals (e.g., `date(2023, 3, 15)` not `date(2023, 03, 15)`)
 
 ## Development Principles
 
