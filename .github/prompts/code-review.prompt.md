@@ -1,6 +1,6 @@
 ---
-name: code-review
-description: Perform structured code reviews with security, performance, and style checks. Use when reviewing PRs, auditing code changes, or when the user asks for a code review.
+name: Code Review
+description: Structured code review with security, performance, and quality checklists
 ---
 
 # Code Review
@@ -14,9 +14,7 @@ Perform thorough, structured code reviews focusing on security, performance, mai
 Before reviewing, gather context:
 
 ```bash
-# View the diff
 git diff main...HEAD
-
 # Or for a specific PR
 gh pr diff <number>
 ```
@@ -67,8 +65,6 @@ gh pr diff <number>
 
 ### 3. Comment Format
 
-Use this format for review comments:
-
 ```text
 **[SEVERITY]** Brief description
 
@@ -78,7 +74,7 @@ Use this format for review comments:
 Explanation of the problem.
 
 **Suggestion:**
-# Recommended fix code here
+Recommended fix.
 
 **Why:**
 Explanation of why this matters.
@@ -94,8 +90,6 @@ Severity levels:
 
 ### 4. Generate Review Summary
 
-After reviewing, provide a summary:
-
 ```markdown
 ## Review Summary
 
@@ -106,23 +100,12 @@ After reviewing, provide a summary:
 - Issues found: X (Y blockers, Z major)
 
 ### Highlights
-- 💚 Good use of type hints
-- 💚 Comprehensive error handling
+- 💚 Good practices observed
 
 ### Required Changes
-1. 🔴 Fix SQL injection in `user.py:42`
-2. 🟠 Add input validation in `api.py:15`
+1. 🔴 [Blocker description]
+2. 🟠 [Major issue description]
 
 ### Suggestions
-1. 🔵 Consider extracting utility function
-2. 🔵 Add docstrings for public methods
+1. 🔵 [Optional improvement]
 ```
-
-## Quick Commands
-
-| Say This | Action |
-|----------|--------|
-| "review this PR" | Full review of current PR |
-| "security review" | Focus on security issues |
-| "performance review" | Focus on performance |
-| "quick review" | High-level review only |

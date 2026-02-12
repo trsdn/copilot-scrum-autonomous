@@ -266,7 +266,7 @@ Ideas → Backlog → Planned → In Progress → Validation → Done
 | Sprint log | `docs/sprints/sprint-N-log.md` | Sprint Start | Huddle decisions, learnings during execution |
 | Velocity data | `docs/sprints/velocity.md` | Sprint Retro | Sprint-over-sprint performance tracking |
 | Issue comments | GitHub Issues | Huddles | Traceable audit trail per issue |
-| Agent memory | `.claude/skills/agent-memory/memories/` | Sprint Retro | Cross-session knowledge persistence |
+| Sprint learnings | `docs/sprints/sprint-N-log.md` | Sprint Retro | Cross-session knowledge persistence |
 
 **Rule**: Huddle results MUST be documented in two places:
 1. **Comment on the completed issue** — creates traceable audit trail

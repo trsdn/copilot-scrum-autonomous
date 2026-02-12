@@ -51,11 +51,9 @@ Sprints flow automatically — planning leads directly into execution without ma
 
 - **ICE Scoring** — Impact × Confidence / Effort for prioritization
 - **Quality Gates** — Test gate (≥3 tests/feature), CI gate, Definition of Done
-- **Agent Dispatch** — Sonnet for code/tests/review, Haiku for commands/search
-- **Subagent-Driven Development** — Fresh subagent per task with two-stage review
+- **Agent Dispatch** — Specialized agents for code/tests/review, lightweight agents for commands/search
 - **Daily Huddles** — Documented on issues + sprint log after each task
 - **Verification Before Completion** — "Evidence before claims, always"
-- **Agent Memory** — Persistent knowledge across sessions
 - **Notifications** — Push notifications via [ntfy.sh](https://ntfy.sh)
 - **Velocity Tracking** — Sprint-over-sprint performance data
 
@@ -74,11 +72,11 @@ cd my-project
 
 | File | What to Change |
 |------|----------------|
-| `CLAUDE.md` | Replace `{{PROJECT_NAME}}` and `{{PROJECT_DESCRIPTION}}` placeholders |
-| `CLAUDE.md` | Add your project-specific commands, coding conventions, key files |
+| `AGENTS.md` | Replace `{{PROJECT_NAME}}` and `{{PROJECT_DESCRIPTION}}` placeholders |
+| `AGENTS.md` | Add your project-specific commands, coding conventions, key files |
 | `docs/architecture/ADR.md` | Add your architectural decisions |
-| `.claude/agents/*.md` | Customize agent expertise for your domain |
-| `.claude/settings.json` | Update allowed commands for your tooling |
+| `.github/agents/*.agent.md` | Customize agent expertise for your domain |
+| `.github/copilot-instructions.md` | Adjust Copilot behavior and conventions |
 | `Makefile` | Add project-specific targets |
 | `pyproject.toml` | Configure your project metadata |
 | `.github/workflows/ci.yml` | Adjust CI for your language/framework |
@@ -104,13 +102,13 @@ Create a GitHub Project board with these columns:
 Ideas → Backlog → Planned → In Progress → Validation → Done
 ```
 
-Update the project board URL in `CLAUDE.md`.
+Update the project board URL in `AGENTS.md`.
 
 ### 5. Start Your First Sprint
 
 ```bash
 # Open GitHub Copilot CLI in your project
-claude
+copilot
 
 # Run sprint planning
 /sprint-planning
@@ -150,75 +148,63 @@ claude
 
 ### Agent Dispatch
 
-| Task | Agent | Model |
-|------|-------|-------|
-| Code changes | `code-developer` | Sonnet |
-| Writing tests | `test-engineer` | Sonnet |
-| Code review | `code-review` | Sonnet |
-| Research/docs | `research-agent` / `documentation-agent` | Sonnet |
-| Quick file search | `explore` | Haiku |
-| Build/test commands | `task` | Haiku |
-
-> ⛔ **Never** use the generic `task` agent (Haiku) for code changes. It lacks reasoning capacity for multi-file edits.
+| Task | Agent | Use Case |
+|------|-------|----------|
+| Code changes | `@code-developer` | Multi-file reasoning, refactoring |
+| Writing tests | `@test-engineer` | Behavior understanding, TDD |
+| Code review | `@code-review` | Structured review with checklists |
+| Research/docs | `@research-agent` / `@documentation-agent` | Synthesis, technical writing |
 
 ## Directory Structure
 
 ```
-├── .claude/
-│   ├── settings.json          # Permissions, hooks, skills & agents registry
-│   ├── hooks/
-│   │   ├── ntfy-notify.sh     # Push notification hook
-│   │   └── session-reminder.sh # Session start reminder
-│   ├── skills/                # Sprint ceremonies + workflow skills
-│   │   ├── sprint-planning/
-│   │   ├── sprint-start/
-│   │   ├── sprint-review/
-│   │   ├── sprint-retro/
-│   │   ├── agent-memory/
-│   │   ├── notify/
-│   │   ├── code-review/
-│   │   ├── create-pr/
-│   │   ├── tdd-workflow/
-│   │   ├── verification-before-completion/
-│   │   ├── writing-plans/
-│   │   ├── subagent-driven-development/
-│   │   └── github-issues/
-│   └── agents/                # Specialized agent definitions
-│       ├── code-developer.md
-│       ├── test-engineer.md
-│       ├── documentation-agent.md
-│       ├── security-reviewer.md
-│       └── research-agent.md
+├── AGENTS.md                        # Project-specific agent instructions
 ├── .github/
+│   ├── copilot-instructions.md      # Main Copilot instructions
+│   ├── agents/                      # Specialized agent definitions
+│   │   ├── code-developer.agent.md
+│   │   ├── test-engineer.agent.md
+│   │   ├── documentation-agent.agent.md
+│   │   ├── security-reviewer.agent.md
+│   │   └── research-agent.agent.md
+│   ├── prompts/                     # Reusable workflow prompts
+│   │   ├── sprint-planning.prompt.md
+│   │   ├── sprint-start.prompt.md
+│   │   ├── sprint-review.prompt.md
+│   │   ├── sprint-retro.prompt.md
+│   │   ├── orchestrate-feature.prompt.md
+│   │   ├── orchestrate-bugfix.prompt.md
+│   │   ├── code-review.prompt.md
+│   │   ├── create-pr.prompt.md
+│   │   └── tdd-workflow.prompt.md
 │   ├── workflows/
-│   │   ├── ci.yml             # CI: lint, typecheck, test, security
-│   │   └── release.yml        # Semantic release
+│   │   ├── ci.yml                   # CI: lint, typecheck, test, security
+│   │   └── release.yml              # Semantic release
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── bug_report.yml
 │   │   ├── feature_request.yml
 │   │   └── config.yml
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── copilot-instructions.md
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
 │   ├── constitution/
-│   │   └── PROCESS.md         # Development process constitution
+│   │   └── PROCESS.md               # Development process constitution
 │   ├── architecture/
-│   │   └── ADR.md             # Architectural Decision Records
+│   │   └── ADR.md                   # Architectural Decision Records
 │   ├── sprints/
-│   │   └── velocity.md        # Sprint velocity tracking
+│   │   └── velocity.md              # Sprint velocity tracking
 │   └── plans/
 │       └── .gitkeep
-├── CLAUDE.md                   # Main Copilot instructions
-├── Makefile                    # Common development targets
-├── pyproject.toml              # Python project configuration
+├── scripts/copilot-notify.sh        # Push notification script
+├── Makefile                          # Common development targets
+├── pyproject.toml                    # Python project configuration
 └── .gitignore
 ```
 
 ## Customization Guide
 
-### Adding Domain-Specific Agents
+### Adding Agents
 
-Create `.claude/agents/your-agent.md`:
+Create `.github/agents/your-agent.agent.md`:
 
 ```markdown
 # Agent: Your Domain Expert
@@ -237,30 +223,47 @@ Create `.claude/agents/your-agent.md`:
 - [Domain-specific rules]
 ```
 
-Register in `.claude/settings.json` under `agents`.
+Agents in `.github/agents/` are automatically discovered by GitHub Copilot CLI.
 
-### Adding New Skills
+### Adding Prompts
 
-Create `.claude/skills/your-skill/SKILL.md`:
+Create `.github/prompts/your-prompt.prompt.md`:
 
-```yaml
+```markdown
 ---
-name: your-skill
-description: "When to use this skill"
+description: "Short description of when to use this prompt"
 ---
+
+# Your Workflow Prompt
+
+## Steps
+
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
 ```
 
-Register in `.claude/settings.json` under `skills`.
+Prompts in `.github/prompts/` are available as slash commands in GitHub Copilot CLI.
 
 ### Language Adaptation
 
 This template defaults to Python tooling. To adapt for other languages:
 
 1. Update `Makefile` targets with your build/test/lint commands
-2. Update `.claude/settings.json` permissions for your tooling
+2. Update `.github/copilot-instructions.md` for your language conventions
 3. Update `.github/workflows/ci.yml` for your CI pipeline
-4. Adjust coding conventions in `CLAUDE.md`
-5. Update TDD skill templates for your test framework
+4. Adjust coding conventions in `AGENTS.md`
+5. Update TDD prompt templates for your test framework
+
+### Customization Reference
+
+| What | Where | Purpose |
+|------|-------|---------|
+| Project-specific instructions | `AGENTS.md` | Commands, conventions, repo structure |
+| Copilot behavior & process | `.github/copilot-instructions.md` | Sprint process, escalation, DoD |
+| Specialized agents | `.github/agents/*.agent.md` | Domain-specific agent roles |
+| Workflow prompts | `.github/prompts/*.prompt.md` | Reusable slash commands |
+| CI pipeline | `.github/workflows/ci.yml` | Build, test, lint automation |
 
 ## Philosophy
 

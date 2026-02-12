@@ -1,6 +1,6 @@
 ---
-name: sprint-planning
-description: "Triage backlog, score issues, select sprint scope, move to Planned. Triggers on: 'sprint planning', 'plan sprint', 'planning start', 'start planning', 'backlog grooming', 'triage', 'prioritize', 'what should we work on next'."
+name: Sprint Planning
+description: Triage backlog, score issues, select sprint scope, move to Planned
 ---
 
 # Sprint Planning
@@ -54,6 +54,7 @@ If issues need research before prioritization:
 ## Step 5: Create New Issues
 
 Capture ideas discovered during discussion:
+
 ```bash
 gh issue create --title "[Type]: Description" --label "priority:X" --body "..."
 gh project item-add <PROJECT_NUMBER> --owner <OWNER> --url <issue_url>
@@ -114,5 +115,5 @@ Verify the move by listing the board.
 Prior sprint: X issues in ~Yh (from docs/sprints/velocity.md)
 ```
 
-After planning is complete, **proceed directly to sprint execution** (no separate `/sprint-start` needed).
+After planning is complete, **proceed directly to sprint execution** (no separate start needed).
 The sprint starts automatically per the stakeholder model. Send a summary notification.

@@ -1,6 +1,6 @@
 ---
-name: create-pr
-description: Creates GitHub pull requests with properly formatted titles. Use when creating PRs, submitting changes for review, or when the user says /pr or asks to create a pull request.
+name: Create PR
+description: Create pull requests with conventional commit title format
 ---
 
 # Create Pull Request
@@ -15,17 +15,17 @@ Creates GitHub PRs with titles following Conventional Commits format.
 
 ### Types (required)
 
-| Type       | Description                                      | Changelog |
-|------------|--------------------------------------------------|-----------|
-| `feat`     | New feature                                      | Yes       |
-| `fix`      | Bug fix                                          | Yes       |
-| `perf`     | Performance improvement                          | Yes       |
-| `test`     | Adding/correcting tests                          | No        |
-| `docs`     | Documentation only                               | No        |
-| `refactor` | Code change (no bug fix or feature)              | No        |
-| `build`    | Build system or dependencies                     | No        |
-| `ci`       | CI configuration                                 | No        |
-| `chore`    | Routine tasks, maintenance                       | No        |
+| Type | Description | Changelog |
+|------|-------------|-----------|
+| `feat` | New feature | Yes |
+| `fix` | Bug fix | Yes |
+| `perf` | Performance improvement | Yes |
+| `test` | Adding/correcting tests | No |
+| `docs` | Documentation only | No |
+| `refactor` | Code change (no bug fix or feature) | No |
+| `build` | Build system or dependencies | No |
+| `ci` | CI configuration | No |
+| `chore` | Routine tasks, maintenance | No |
 
 ### Scopes (optional but recommended)
 
@@ -51,10 +51,7 @@ Define scopes based on your project structure. Examples:
    git log origin/main..HEAD --oneline
    ```
 
-2. **Analyze changes** to determine:
-   - Type: What kind of change is this?
-   - Scope: Which area is affected?
-   - Summary: What does the change do?
+2. **Analyze changes** to determine type, scope, and summary.
 
 3. **Push branch if needed**:
    ```bash

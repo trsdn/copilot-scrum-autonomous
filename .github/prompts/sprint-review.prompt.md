@@ -1,6 +1,6 @@
 ---
-name: sprint-review
-description: "Review sprint deliverables: demo, metrics, autonomous accept (escalate per PROCESS.md MUST criteria). Triggers on: 'sprint review', 'review sprint', 'what did we deliver', 'demo', 'show results'."
+name: Sprint Review
+description: Review sprint deliverables, metrics, and autonomous acceptance
 ---
 
 # Sprint Review
@@ -87,6 +87,7 @@ For each issue touched:
 - **Blocked** → Label, document why
 
 Create issues for any discovered work:
+
 ```bash
 gh issue create --title "[Type]: Description" --label "priority:X" --body "..."
 ```
@@ -103,9 +104,7 @@ Move incomplete items back to Planned with notes.
 ## Step 6: Notify
 
 ```bash
-if [ -n "$NTFY_TOPIC" ]; then
-  curl -s -H "Title: 📋 Sprint Review" -d "Done: X/Y issues. Key: [finding]" ntfy.sh/$NTFY_TOPIC
-fi
+scripts/copilot-notify.sh "📋 Sprint Review" "Done: X/Y issues. Key: [finding]"
 ```
 
-After review, use `/sprint-retro` for process improvement.
+After review, run sprint retro for process improvement.
