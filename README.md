@@ -231,7 +231,10 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 │   │   ├── test-engineer.agent.md
 │   │   ├── documentation-agent.agent.md
 │   │   ├── security-reviewer.agent.md
-│   │   └── research-agent.agent.md
+│   │   ├── research-agent.agent.md
+│   │   ├── architect.agent.md
+│   │   ├── release-agent.agent.md
+│   │   └── copilot-customization-builder.agent.md
 │   ├── prompts/                     # Reusable workflow prompts
 │   │   ├── sprint-planning.prompt.md
 │   │   ├── sprint-start.prompt.md
@@ -241,7 +244,12 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 │   │   ├── orchestrate-bugfix.prompt.md
 │   │   ├── code-review.prompt.md
 │   │   ├── create-pr.prompt.md
-│   │   └── tdd-workflow.prompt.md
+│   │   ├── tdd-workflow.prompt.md
+│   │   ├── architecture-review.prompt.md
+│   │   ├── release-check.prompt.md
+│   │   ├── new-custom-agent.prompt.md
+│   │   ├── new-prompt-file.prompt.md
+│   │   └── new-instructions-file.prompt.md
 │   ├── workflows/
 │   │   ├── ci.yml                   # CI: lint, typecheck, test, security
 │   │   └── release.yml              # Semantic release
@@ -252,11 +260,15 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
 │   ├── constitution/
-│   │   └── PROCESS.md               # Development process constitution
+│   │   ├── PROCESS.md               # Development process constitution
+│   │   └── PHILOSOPHY.md            # Project philosophy and principles
 │   ├── architecture/
 │   │   └── ADR.md                   # Architectural Decision Records
+│   ├── research/
+│   │   └── JOURNAL.md               # Research findings journal
 │   ├── sprints/
-│   │   └── velocity.md              # Sprint velocity tracking
+│   │   ├── velocity.md              # Sprint velocity tracking
+│   │   └── SPRINT-LOG-TEMPLATE.md   # Template for sprint logs
 │   └── plans/
 │       └── .gitkeep
 ├── scripts/copilot-notify.sh        # Push notification script
