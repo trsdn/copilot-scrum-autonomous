@@ -38,6 +38,15 @@ Score = Impact × Confidence / Effort. ≥4 = high, 2-3 = medium, <2 = low.
 gh issue edit N --add-label "priority:high"
 ```
 
+### Acceptance Criteria Gate
+
+Before adding an issue to the sprint:
+1. Does the issue have testable acceptance criteria? If not → write them now and add to the issue
+2. For new modules: is there an interface sketch (function signatures, input/output)? If not → add it
+3. Is the scope boundary clear (what's in, what's out)? If not → clarify
+
+**Never plan an issue that says "improve X" without defining what "improved" means measurably.**
+
 ## Step 3: Elaborate Top Issues
 
 For high-priority issues missing detail:

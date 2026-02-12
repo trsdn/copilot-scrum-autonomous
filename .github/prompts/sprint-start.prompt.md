@@ -78,13 +78,22 @@ git worktree add -b <branch-name> ../<project>-<short-id> main
 cd ../<project>-<short-id>
 ```
 
-### 5b. Implementation Flow
+### 5b. Pre-Implementation Check
+
+Before writing code for each issue:
+1. **Read the acceptance criteria** on the issue — they define "done"
+2. **For new modules**: define the interface first (function signatures, types, contracts) before implementation
+3. **Write test stubs** from the acceptance criteria before writing production code
+
+This is not full spec-driven development — it's just-enough precision to prevent the agent from building the wrong thing.
+
+### 5c. Implementation Flow
 
 ```
 implement → lint/type-check → write unit tests → validate → code review → PR → merge
 ```
 
-### 5c. Quality Gates
+### 5d. Quality Gates
 
 **⛔ TEST GATE**: Every feature PR MUST include unit tests.
 - Use `@test-engineer` agent after implementation, before PR
@@ -99,7 +108,7 @@ implement → lint/type-check → write unit tests → validate → code review 
 - Issue closed with summary
 - **Issue closed**: Status labels removed
 
-### 5d. 🔄 Daily Huddle (after each issue completes)
+### 5e. 🔄 Daily Huddle (after each issue completes)
 
 **Do NOT skip this.**
 

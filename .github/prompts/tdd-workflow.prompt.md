@@ -7,6 +7,8 @@ description: Test-Driven Development with Red-Green-Refactor cycle
 
 Write failing tests first, then implement code to make them pass.
 
+> **When to use**: RECOMMENDED for all feature issues. REQUIRED when the issue has Given/When/Then acceptance criteria. The acceptance criteria on the issue ARE your test specifications.
+
 ## When to Use
 
 - Implementing a user story with acceptance criteria
