@@ -59,6 +59,19 @@ gh issue list --state open --label "status:in-progress"
 | Bugs found during sprint | |
 ```
 
+### Drift Analysis
+
+Before presenting results:
+
+1. Run `git diff --stat <first-commit-of-sprint>..HEAD` to see all files changed
+2. For each changed file, verify it relates to a sprint issue
+3. Report any files that were changed but don't relate to planned issues
+4. Count issues created during the sprint: planned vs unplanned
+
+Include in the review summary:
+- **Scope adherence**: X/Y planned issues completed, Z unplanned issues created
+- **File drift**: [none / list of unrelated file changes]
+
 ## Step 3: Stakeholder Acceptance
 
 Check `docs/constitution/PROCESS.md` escalation criteria:

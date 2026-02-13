@@ -122,6 +122,7 @@ gh issue comment N --body "### Huddle — Sprint X, Issue X/Y done
 **Outcome**: [what was delivered, key metric or result]
 **Key learning**: [anything discovered during implementation]
 **Decision**: [any re-prioritization or scope change]
+**Drift**: ✅ on track / ⚠️ [drift description]
 **Next**: #M — [title]"
 ```
 
@@ -138,6 +139,13 @@ gh issue comment N --body "### Huddle — Sprint X, Issue X/Y done
 - Does anything we learned change the priority of remaining issues?
 - Should we re-order?
 - Any blockers?
+
+**Drift check**:
+- [ ] This issue was in the sprint plan
+- [ ] No unplanned scope added without escalation
+- [ ] Files changed relate to sprint issues
+- [ ] Sprint goal still achievable
+⚠️ If any unchecked → STOP and escalate
 
 **Next up**: #M — [title]
 ```
