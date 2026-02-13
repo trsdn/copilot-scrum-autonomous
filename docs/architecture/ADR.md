@@ -60,7 +60,7 @@ GitHub Issues is the ONLY task tracking system. All work items, bugs, features, 
 - Single source of truth for all work
 - Traceable audit trail via issue comments
 - Integration with PRs, commits, and CI
-- Project board provides visual workflow
+- Labels + milestones provide visual workflow
 
 **Negative:**
 - Requires discipline to always create issues
