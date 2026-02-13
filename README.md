@@ -60,6 +60,16 @@ Sprints flow automatically — planning leads directly into execution without ma
 - **Notifications** — Push notifications via [ntfy.sh](https://ntfy.sh)
 - **Velocity Tracking** — Sprint-over-sprint performance data
 
+## Prerequisites
+
+- **GitHub Copilot subscription** (Pro, Pro+, Business, or Enterprise) — [plans](https://github.com/features/copilot/plans)
+- **Copilot CLI** installed — [installation guide](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
+- **Experimental mode enabled** — Autopilot mode is experimental and must be activated:
+  ```bash
+  copilot --experimental    # Enable on first launch (persisted in config)
+  ```
+  Once inside a session, press `Shift+Tab` to cycle to **Autopilot mode** — this lets the agent continue working until a task is complete, which is essential for autonomous sprints.
+
 ## Getting Started
 
 ### 1. Use as Template
