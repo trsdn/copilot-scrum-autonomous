@@ -1,6 +1,6 @@
 ---
-name: Sprint Retro
-description: Sprint retrospective with process improvements and velocity tracking
+name: sprint-retro
+description: "Sprint retrospective: what went well/badly, process improvements. Triggers on: 'sprint retro', 'retrospective', 'retro', 'what went well'."
 ---
 
 # Sprint Retrospective

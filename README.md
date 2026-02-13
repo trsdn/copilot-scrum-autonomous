@@ -229,26 +229,27 @@ This data drives sprint sizing — the agent uses historical velocity to determi
 │   │   ├── research-agent.agent.md
 │   │   ├── security-reviewer.agent.md
 │   │   └── test-engineer.agent.md
-│   ├── prompts/                     # Reusable workflow prompts
-│   │   ├── architecture-review.prompt.md
-│   │   ├── code-review.prompt.md
-│   │   ├── create-pr.prompt.md
-│   │   ├── direction-gate.prompt.md
-│   │   ├── issue-triage.prompt.md
-│   │   ├── new-custom-agent.prompt.md
-│   │   ├── new-instructions-file.prompt.md
-│   │   ├── new-prompt-file.prompt.md
-│   │   ├── orchestrate-bugfix.prompt.md
-│   │   ├── orchestrate-feature.prompt.md
-│   │   ├── release-check.prompt.md
-│   │   ├── sprint-planning.prompt.md
-│   │   ├── sprint-retro.prompt.md
-│   │   ├── sprint-review.prompt.md
-│   │   ├── sprint-start.prompt.md
-│   │   ├── subagent-dispatch.prompt.md
-│   │   ├── tdd-workflow.prompt.md
-│   │   ├── web-research.prompt.md
-│   │   └── writing-plans.prompt.md
+│   ├── skills/                      # Reusable workflow skills
+│   │   ├── architecture-review/SKILL.md
+│   │   ├── code-review/SKILL.md
+│   │   ├── create-pr/SKILL.md
+│   │   ├── direction-gate/SKILL.md
+│   │   ├── issue-triage/SKILL.md
+│   │   ├── new-custom-agent/SKILL.md
+│   │   ├── new-instructions-file/SKILL.md
+│   │   ├── new-prompt-file/SKILL.md
+│   │   ├── orchestrate-bugfix/SKILL.md
+│   │   ├── orchestrate-feature/SKILL.md
+│   │   ├── refine/SKILL.md
+│   │   ├── release-check/SKILL.md
+│   │   ├── sprint-planning/SKILL.md
+│   │   ├── sprint-retro/SKILL.md
+│   │   ├── sprint-review/SKILL.md
+│   │   ├── sprint-start/SKILL.md
+│   │   ├── subagent-dispatch/SKILL.md
+│   │   ├── tdd-workflow/SKILL.md
+│   │   ├── web-research/SKILL.md
+│   │   └── writing-plans/SKILL.md
 │   ├── workflows/
 │   │   ├── ci.yml                   # CI: lint, typecheck, test, security
 │   │   └── release.yml              # Semantic release
@@ -301,16 +302,17 @@ Create `.github/agents/your-agent.agent.md`:
 
 Agents in `.github/agents/` are automatically discovered by GitHub Copilot CLI.
 
-### Adding Prompts
+### Adding Skills
 
-Create `.github/prompts/your-prompt.prompt.md`:
+Create `.github/skills/your-skill/SKILL.md`:
 
 ```markdown
 ---
-description: "Short description of when to use this prompt"
+name: your-skill
+description: "Short description of when to use this skill. Triggers on: 'keyword1', 'keyword2'."
 ---
 
-# Your Workflow Prompt
+# Your Workflow Skill
 
 ## Steps
 
@@ -319,7 +321,7 @@ description: "Short description of when to use this prompt"
 3. [Step 3]
 ```
 
-Prompts in `.github/prompts/` are available as slash commands in GitHub Copilot CLI.
+Skills in `.github/skills/` are available in both GitHub Copilot CLI and VS Code Insiders.
 
 ### Language Adaptation
 
@@ -329,7 +331,7 @@ This template defaults to Python tooling. To adapt for other languages:
 2. Update `.github/copilot-instructions.md` for your language conventions
 3. Update `.github/workflows/ci.yml` for your CI pipeline
 4. Adjust coding conventions in `AGENTS.md`
-5. Update TDD prompt templates for your test framework
+5. Update TDD skill templates for your test framework
 
 ### Customization Reference
 
@@ -338,7 +340,7 @@ This template defaults to Python tooling. To adapt for other languages:
 | Project-specific instructions | `AGENTS.md` | Commands, conventions, repo structure |
 | Copilot behavior & process | `.github/copilot-instructions.md` | Sprint process, escalation, DoD |
 | Specialized agents | `.github/agents/*.agent.md` | Domain-specific agent roles |
-| Workflow prompts | `.github/prompts/*.prompt.md` | Reusable slash commands |
+| Workflow skills | `.github/skills/*/SKILL.md` | Reusable workflow skills |
 | CI pipeline | `.github/workflows/ci.yml` | Build, test, lint automation |
 
 ## Philosophy

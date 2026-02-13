@@ -46,7 +46,7 @@ Before completing:
 ## Guidelines
 
 - Agent files use kebab-case: `my-agent.agent.md`
-- Prompt files use kebab-case: `my-prompt.prompt.md`
+- Skill files use kebab-case directories: `.github/skills/my-skill/SKILL.md`
 - Instructions files are always named `copilot-instructions.md`
 - All content must be domain-agnostic when creating templates
 - YAML frontmatter must be the first thing in the file (after `---`)
