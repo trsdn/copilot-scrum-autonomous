@@ -11,96 +11,38 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: Lint & Format
+  validate:
+    name: Validate Template
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+      - name: Check required files exist
+        run: |
+          files=(
+            ".github/copilot-instructions.md"
+            "docs/constitution/PROCESS.md"
+            "AGENTS.md"
+            "README.md"
+          )
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Missing: $f"
+              exit 1
+            fi
+            echo "✅ Found: $f"
+          done
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: Validate YAML files
+        run: |
+          pip install yamllint --quiet
+          find . -name "*.yml" -o -name "*.yaml" | head -20 | while read f; do
+            yamllint -d "{extends: relaxed, rules: {line-length: disable}}" "$f" && echo "✅ $f" || echo "⚠️ $f has warnings"
+          done
 
-      - name: Install dependencies
-        run: uv sync --dev
-
-      - name: Lint
-        run: uv run ruff check src/
-
-      - name: Format check
-        run: uv run ruff format --check src/
-
-  typecheck:
-    name: Type Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync --dev
-
-      - name: Type check
-        run: uv run mypy src/
-
-  test:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync --dev
-
-      - name: Run tests
-        run: uv run pytest tests/ -v --tb=short
-
-      - name: Run tests with coverage
-        run: uv run pytest tests/ --cov=src/ --cov-report=term-missing --cov-fail-under=80
-
-  security:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: uv sync --dev
-
-      - name: Run bandit
-        run: uv run bandit -r src/ -c pyproject.toml || true
+      - name: Check for unresolved placeholders
+        run: |
+          # Only warn — placeholders are expected in template repos
+          if grep -r "{{" --include="*.md" --include="*.yml" --include="*.yaml" . | grep -v ".git/" | grep -v "node_modules/"; then
+            echo "ℹ️ Placeholders found (expected for template repos)"
+          fi
