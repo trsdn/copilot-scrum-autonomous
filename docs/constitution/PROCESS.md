@@ -94,6 +94,25 @@ This applies to ALL issues regardless of origin. Priority flows from the stakeho
 
 ---
 
+### 5. PROCESS OVER SPEED (Never Optimize Away the Process)
+
+**Goal**: The development process protects quality, traceability, and stakeholder oversight. It is never bypassed for speed.
+
+**Rules**:
+- Every code change goes through: feature branch → PR → CI green → squash-merge
+- Never push directly to main. Never use `--no-verify`. Never skip CI.
+- "Small fix" or "quick change" is not an excuse — the process IS the small fix
+- Autonomy mode does NOT mean process-free mode. It means autonomous *within* the process
+- If the process feels slow, improve it (Principle 4). Never bypass it.
+
+**Anti-patterns:**
+- ❌ "This is just a one-liner, I'll push directly" → Create branch + PR
+- ❌ "CI is slow, I'll merge and fix later" → Wait for CI green
+- ❌ "I'll batch 5 issues into one commit to save time" → One issue, one branch, one PR
+- ❌ "Pre-commit hooks are failing, I'll skip them" → Fix the errors
+
+---
+
 ## Stakeholder Model
 
 ### Roles
@@ -111,6 +130,7 @@ The agent operates autonomously through full sprint cycles (plan → execute →
 
 | Trigger | Why | Example |
 |---------|-----|---------|
+| **Process bypass** | Process integrity is non-negotiable | "Pushing to main directly to save time", skipping PR, skipping CI |
 | **Strategic direction change** | Only the stakeholder sets project direction | "Should we pivot from X to Y?" |
 | **ADR creation or modification** | Architectural decisions are irreversible | New ADR or changing existing one |
 | **Constitution change** | PROCESS.md amendments | Changing quality thresholds |

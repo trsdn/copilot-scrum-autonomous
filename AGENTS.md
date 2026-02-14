@@ -71,7 +71,13 @@ See `docs/architecture/ADR.md` for immutable architectural decisions.
 | CI Fixer | `@ci-fixer` | Diagnose and fix CI/CD failures |
 | Copilot Customization Builder | `@copilot-customization-builder` | Create agents, skills, instructions |
 
-## ⛔ CI Gate — Enforcement
+## ⛔ Workflow Gates
+
+**⛔ Gate 0: PROCESS OVER SPEED — Every code change requires: feature branch → PR → CI green → merge. No exceptions. Not for "small fixes". Not for "time pressure". Not for "autonomy mode". Direct pushes to main are a process violation, not a shortcut.**
+
+1. **Every Change → Branch + PR**: `git checkout -b feat/<issue>-<name>` → commit → push → `gh pr create` → CI green → squash-merge. Never `git push origin main`. Never `--no-verify`.
+
+### ⛔ Gate 1: CI Gate — Enforcement
 
 **After creating a PR, wait 3-5 minutes for CI to complete before merging.**
 
