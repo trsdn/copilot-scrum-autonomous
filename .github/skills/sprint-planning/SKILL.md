@@ -75,7 +75,7 @@ Select top 7 candidates by ICE score. Check `docs/constitution/PROCESS.md` MUST 
 - If any selected issue triggers a MUST escalation → notify stakeholder and wait
 - Otherwise → proceed autonomously (no need to ask "which issues?")
 
-**⚠️ STAKEHOLDER AUTHORITY**: If the stakeholder created an issue or set its priority, that takes precedence over ICE scoring. Never skip or deprioritize a stakeholder-created issue in favor of agent-discovered work.
+**⚠️ STAKEHOLDER AUTHORITY**: The agent NEVER changes priorities, scope, or closes issues on its own. If the agent believes a priority or scope should change, it MUST escalate — present evidence, explain concerns, then wait for the stakeholder's decision.
 
 Consider velocity from prior sprints (check `docs/sprints/velocity.md`).
 

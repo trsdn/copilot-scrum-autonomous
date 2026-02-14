@@ -30,7 +30,7 @@ If no ideas found, report "No ideas to refine" and stop.
 
 ### 2b. Decompose
 
-**⚠️ STAKEHOLDER AUTHORITY**: The decomposed issues MUST collectively cover the FULL scope of the original idea. Do not produce a "simplified version" or drop parts you consider low-value. The stakeholder decides what matters, not the agent.
+**⚠️ STAKEHOLDER AUTHORITY**: The agent NEVER changes priorities, scope, or closes issues on its own. The decomposed issues MUST collectively cover the FULL scope of the original idea. If full scope isn't feasible, escalate to the stakeholder rather than silently descoping.
 
 Break the idea into 3-8 concrete issues. Each issue MUST have:
 

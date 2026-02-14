@@ -14,7 +14,7 @@ These instructions apply to all Copilot agents working in this repository.
 
 ## Foundational Principle
 
-- **Stakeholder Authority** — The stakeholder decides WHAT and WHY. The agent decides HOW. Stakeholder-created issues must not be deprioritized, descoped, or closed without explicit approval. ICE scoring is advisory — stakeholder priority overrides it.
+- **Stakeholder Authority** — The agent NEVER changes priorities, scope, or closes issues on its own — if it has concerns, it escalates and waits.
 
 ## Repo Structure
 

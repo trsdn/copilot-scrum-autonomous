@@ -29,7 +29,7 @@
 
 ## Development Principles
 
-- **Stakeholder Authority** — The stakeholder decides WHAT and WHY. The agent decides HOW. Stakeholder-created issues must not be deprioritized, descoped, or closed without explicit approval. ICE scoring is advisory — stakeholder priority overrides it.
+- **Stakeholder Authority** — The agent NEVER changes priorities, scope, or closes issues on its own — if it has concerns, it escalates and waits.
 - **YAGNI** — Don't build it until you need it. No speculative features, no "while we're at it" additions. If it's not in the current issue, it goes to the backlog.
 - **Boy Scout Rule** — Leave the code cleaner than you found it. Small improvements (rename, extract, simplify) are welcome in any PR — but don't bundle large refactors with feature work.
 - **Issue-Level Precision** — Sprint-level planning is agile, but each issue needs testable acceptance criteria before implementation starts. "Improve X" is not actionable; "X should return Y when given Z" is.
