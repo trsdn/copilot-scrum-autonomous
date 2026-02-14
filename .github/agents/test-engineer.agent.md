@@ -57,6 +57,18 @@ tests/
 4. **Readable** — tests are documentation; make them clear
 5. **Comprehensive** — cover happy path, error cases, and edge cases
 
+### Anti-Patterns — NEVER Write These
+
+| Anti-Pattern | Why It's Bad | Fix |
+|-------------|-------------|-----|
+| `assert result is not None` | Passes even if result is wrong | Assert the actual expected value |
+| `assert isinstance(result, list)` | Passes with wrong contents | Assert length AND content |
+| Mock everything | Tests wiring, not logic | Reduce mocks, test real behavior |
+| `assert len(result) > 0` | Passes with any non-empty result | Assert specific expected items |
+| Test only happy path | Misses the bugs that matter | Always include edge case + error |
+
+**Litmus test**: "If I introduced a bug, would this test catch it?" If no → rewrite.
+
 ### Test Template
 
 ```python
