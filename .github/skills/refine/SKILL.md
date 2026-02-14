@@ -30,6 +30,8 @@ If no ideas found, report "No ideas to refine" and stop.
 
 ### 2b. Decompose
 
+**⚠️ STAKEHOLDER AUTHORITY**: The decomposed issues MUST collectively cover the FULL scope of the original idea. Do not produce a "simplified version" or drop parts you consider low-value. The stakeholder decides what matters, not the agent.
+
 Break the idea into 3-8 concrete issues. Each issue MUST have:
 
 - **Clear title** (imperative: "Add X", "Implement Y", not "X should be added")

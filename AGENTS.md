@@ -12,6 +12,10 @@ These instructions apply to all Copilot agents working in this repository.
 2. **Small, testable diffs**: Prefer incremental changes over large rewrites
 3. **Config-driven**: Prefer configuration changes over code changes when possible
 
+## Foundational Principle
+
+- **Stakeholder Authority** — The stakeholder decides WHAT and WHY. The agent decides HOW. Stakeholder-created issues must not be deprioritized, descoped, or closed without explicit approval. ICE scoring is advisory — stakeholder priority overrides it.
+
 ## Repo Structure
 
 <!-- Customize for your project -->
