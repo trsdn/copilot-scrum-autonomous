@@ -67,6 +67,19 @@ See `docs/architecture/ADR.md` for immutable architectural decisions.
 | CI Fixer | `@ci-fixer` | Diagnose and fix CI/CD failures |
 | Copilot Customization Builder | `@copilot-customization-builder` | Create agents, skills, instructions |
 
+## ⛔ CI Gate — Enforcement
+
+**After creating a PR, wait 3-5 minutes for CI to complete before merging.**
+
+```bash
+gh run list --branch <branch> --limit 3   # ALL must show ✓
+gh run view <run-id> --log-failed          # If any show ✗, diagnose
+```
+
+- **Do NOT merge on red. No exceptions.**
+- "Tests passed locally" is NOT sufficient — CI must be green.
+- Only after CI is green: `gh pr merge <number> --squash --delete-branch`
+
 ## Available Skills
 
 | Skill | Use For |

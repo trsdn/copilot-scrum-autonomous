@@ -103,8 +103,16 @@ Before claiming work is complete, fixed, or passing:
 | "Lint clean" | Linter output: 0 errors | Partial check |
 | "Bug fixed" | Regression test: red→green | "Code changed" |
 | "Build succeeds" | Build exit code 0 | "Linter passed" |
+| "CI green" | `gh run list --branch <branch>` shows ✓ | "I pushed, should be fine" |
+| "PR ready to merge" | CI green + review done | "PR created" |
 
-**Red flags**: Using "should", "probably", expressing satisfaction before verification, about to commit without running tests.
+**Key Patterns — CI Pipeline**:
+
+✅ Wait 3-5 min → `gh run list --branch <branch> --limit 3` → all ✓ → "CI green"
+❌ "I pushed, CI should pass" / "Tests passed locally"
+❌ Merging without checking CI status
+
+**Red flags**: Using "should", "probably", expressing satisfaction before verification, about to commit without running tests, merging without verifying CI status.
 
 ---
 

@@ -90,7 +90,7 @@ This is not full spec-driven development — it's just-enough precision to preve
 ### 5c. Implementation Flow
 
 ```
-implement → lint/type-check → write unit tests → validate → code review → PR → merge
+implement → lint/type-check → write unit tests → validate → code review → PR → wait for CI → merge
 ```
 
 ### 5d. Quality Gates
@@ -100,11 +100,21 @@ implement → lint/type-check → write unit tests → validate → code review 
 - Minimum 3 tests per feature (happy path, edge case, parameter effect)
 - Tests must verify **actual behavior**, not just "runs without error"
 
+**⛔ CI GATE** (after PR creation, before merge):
+- Push PR, then **wait 3-5 minutes** for CI pipeline to complete
+- Run: `gh run list --branch <branch> --limit 3`
+- ALL checks must show ✓ (green). If any show ✗ (red):
+  1. Run `gh run view <run-id> --log-failed` to get failure details
+  2. Fix the issue on the branch
+  3. Push and wait for CI again
+  4. **Do NOT merge on red. No exceptions.**
+- Only after CI is green: `gh pr merge <number> --squash --delete-branch`
+
 **⛔ DEFINITION OF DONE** (see `.github/copilot-instructions.md` for full checklist):
 - Code + lint + types clean
 - Unit tests (min 3, behavior-verifying)
 - PR reviewed + squash-merged
-- CI green before merge
+- **CI green** (verified with `gh run list`)
 - Issue closed with summary
 - **Issue closed**: Status labels removed
 
@@ -164,7 +174,7 @@ gh issue comment N --body "### Huddle — Sprint X, Issue X/Y done
 | Code review | `@code-developer` | Architectural judgment |
 | Research/docs | `@research-agent` / `@documentation-agent` | Synthesis |
 
-**⛔ CI GATE**: After creating a PR, wait 3-5 minutes for CI to complete. Verify green with `gh run list --branch <branch> --limit 3` BEFORE merging.
+**⛔ CI GATE**: After creating a PR, wait 3-5 minutes for CI to complete. Verify green with `gh run list --branch <branch> --limit 3` BEFORE merging. **Do NOT merge on red — no exceptions.**
 
 ## Output Format
 

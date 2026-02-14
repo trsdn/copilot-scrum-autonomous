@@ -36,7 +36,7 @@
 - [ ] If bugfix: regression test that FAILS before fix, PASSES after
 - [ ] Acceptance criteria defined on the issue **before** implementation starts
 - [ ] PR created, code-reviewed, squash-merged
-- [ ] CI green before merge (wait 3-5min, verify with `gh run list`)
+- [ ] CI green before merge (wait 3-5min, verify with `gh run list --branch <branch> --limit 3` — **do NOT merge on red**)
 - [ ] Issue closed with summary comment
 - [ ] Status labels removed, issue closed
 - [ ] Worktree cleaned up
